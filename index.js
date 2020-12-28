@@ -6,6 +6,8 @@ const connection = require('./database/database.js');
 const articlesController = require('./articles/articlesController.js');
 const categoriesController = require('./categories/categoriesController.js');
 
+const Article = require('./articles/article.js');
+const Category = require('./categories/category.js');
 // DATABASE
 connection.authenticate()
 
