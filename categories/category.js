@@ -18,8 +18,8 @@ const Category = connection.define('CATEGORIES', {
     }
 })
 
-// Category.sync(
-//     { force: true }
-// );
+Category.sync(
+    // { force: true }
+);
 
 module.exports = Category;

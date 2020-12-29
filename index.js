@@ -6,8 +6,8 @@ const connection = require('./database/database.js');
 const articlesController = require('./articles/articlesController.js');
 const categoriesController = require('./categories/categoriesController.js');
 
-const Article = require('./articles/article.js');
 const Category = require('./categories/category.js');
+const Article = require('./articles/article.js');
 // DATABASE
 connection.authenticate()
 
@@ -19,8 +19,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use('/articles', articlesController);
-app.use('/categories', categoriesController);
+app.use('/', articlesController);
+app.use('/', categoriesController);
 
 app.get('/', (req, res) => {
     res.render('./index.ejs');
