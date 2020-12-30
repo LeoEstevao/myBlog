@@ -2,6 +2,7 @@
 <%- include('../../partials/navbar.ejs');%>
 <div class="container">
     <h1>Categorias</h1>
+    <a href="./categories/new" class="btn btn-success">Nova categoria</a>
     <table class="table table-striped">
         <thead>
             <th>ID</th>
@@ -15,10 +16,35 @@
                     <th><%= categorie.ID%></th>
                     <th><%= categorie.NAME%></th>
                     <th><%= categorie.SLUG%></th>
-                    <th><%= categorie.createdAt%></th>
+                    <th>
+                        <a class="btn btn-warning" href="/admin/categories/edit?categId=<%= categorie.ID%>">
+                            <!-- <button class="btn btn-warning"> -->
+                                Editar
+                            <!-- </button> -->
+                        </a>
+                        
+                        <form action="/admin/categories/delete" method="POST" onsubmit="wannaDelete(event)">
+                            <input type="hidden" name="categId" value="<%= categorie.ID%>">
+                            <button class="btn btn-danger" >
+                                Apagar
+                            </button>
+                        </form>
+                    </th>
                 </tr>
             <% }); %>
         </tbody>
     </table>
 </div>
 <%- include('../../partials/footer.ejs'); %>
+<script>
+    function wannaDelete(event) {
+        let categName = event.target.parentElement.parentElement.childNodes[3].innerText;
+        
+        // Cancelando Submit
+        event.preventDefault();
+
+        // Confirmar Exclusao
+        if(confirm(`Deseja Deletar a categoria "${categName}"?`))
+            event.target.submit();
+    }
+</script>

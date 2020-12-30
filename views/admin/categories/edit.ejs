@@ -1,0 +1,13 @@
+<%- include('../../partials/header.ejs'); %>
+<%- include('../../partials/navbar.ejs');%>
+<div class="container">
+    <h1>Atualizar categoria</h1>
+    <form action="/admin/categories/update" method="POST">
+        <input type="hidden" name="categId" value="<%= result.ID%>">
+        <input class="form-control" type="text" name="categName" placeholder="<%= result.NAME %>">
+        <button class="btn btn-success" type="submit">Atualizar</button>
+
+        <%- JSON.stringify(result).replace(/(,)|({)/g,"<br>") %>
+    </form>
+</div>
+<%- include('../../partials/footer.ejs'); %>
