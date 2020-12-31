@@ -23,7 +23,11 @@ const Article = connection.define('ARTICLES', {
     }
 })
 
-Category.hasMany(Article);
+Category.hasMany(Article, {
+  foreignKey: {
+    name: 'CATEGORYID'
+  }
+});
 
 Article.sync(
     // { force: false }
