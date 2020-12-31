@@ -4,7 +4,7 @@ const Category = require('./category.js');
 const slugify = require('slugify');
 
 // LIST CATEGORYS
-router.get('/admin/categories', (req, res) => {
+router.get('/categories', (req, res) => {
     Category.findAll().then( resCategories => {
         res.render('./admin/categories/index.ejs', { categories:resCategories })
     })
@@ -12,12 +12,12 @@ router.get('/admin/categories', (req, res) => {
 })
 
 // CREATE CATEGORY
-router.get('/admin/categories/new', (req, res) => {
+router.get('/categories/new', (req, res) => {
     res.render('./admin/categories/new.ejs');
 
 });
 
-router.post('/admin/categories/save', (req, res) => {
+router.post('/categories/save', (req, res) => {
     let categTitle = req.body.categTitle;
     
     if(categTitle != '') 
@@ -25,7 +25,7 @@ router.post('/admin/categories/save', (req, res) => {
         NAME: categTitle,
         SLUG: slugify(categTitle)
     }).then( () => {
-        res.redirect('/admin/categories');
+        res.redirect('./');
     })
     else
     res.render('./admin/categories/new.ejs');
@@ -33,7 +33,7 @@ router.post('/admin/categories/save', (req, res) => {
 
 
 // DELETE CATEGORY
-router.post('/admin/categories/delete', (req, res) => {
+router.post('/categories/delete', (req, res) => {
     let categId = req.body.categId;
     if(categId == undefined)
         // return res.send(categId)
@@ -46,28 +46,28 @@ router.post('/admin/categories/delete', (req, res) => {
             ID: categId
         }
     }).then( () => {
-        res.redirect('/admin/categories');
+        res.redirect('.');
     })
 })
 
 
 // EDIT CATEGORY
 
-router.get('/admin/categories/edit', (req, res) => {
+router.get('/categories/edit', (req, res) => {
     let categId = isNaN(req.query['categId']) ? undefined : req.query['categId'];
 
     Category.findByPk(categId).then( result => {
         if(categId == undefined)
-            res.redirect('/admin/categories');
+            res.redirect('/categories');
         res.render('./admin/categories/edit.ejs', {
             result
         })
     }).catch(err => {
-        res.redirect('/admin/categories');
+        res.redirect('./');
     })
 })
 
-router.post('/admin/categories/update', (req, res) => {
+router.post('/categories/update', (req, res) => {
     let categId = req.body.categId;
     let categName = req.body.categName;
     Category.update(
@@ -79,7 +79,7 @@ router.post('/admin/categories/update', (req, res) => {
             where:
             {ID: categId}
         }).then(() =>{
-            res.redirect('/admin/categories')
+            res.redirect('./')
         })
 })
 

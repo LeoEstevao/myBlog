@@ -19,8 +19,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use('/', articlesController);
-app.use('/', categoriesController);
+app.use('/admin', articlesController);
+app.use('/admin', categoriesController);
 
 app.get('/', (req, res) => {
     res.render('./index.ejs');

@@ -1,0 +1,11 @@
+<%- include('../../partials/header.ejs'); %>
+<%- include('../../partials/navbar.ejs');%>
+<div class="container">
+    <h1>Cadastro de Artigos</h1>
+    <form action="/admin/articles/save" method="POST">
+        <input class="form-control" type="text" name="articTitle" placeholder="Nome do Artigo">
+        <textarea name="articText" class="form-control" rows="10"></textarea>
+        <button class="btn btn-success" type="submit">Criar</button>
+    </form>
+</div>
+<%- include('../../partials/footer.ejs'); %>
