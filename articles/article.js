@@ -28,6 +28,7 @@ Category.hasMany(Article, {
     name: 'CATEGORYID'
   }
 });
+Article.belongsTo(Category);
 
 Article.sync(
     // { force: false }

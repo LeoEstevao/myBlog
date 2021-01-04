@@ -1,0 +1,49 @@
+<%- include('../../partials/header.ejs'); %>
+<%- include('../../partials/navbar.ejs');%>
+<div class="container">
+    <h1>Artigos</h1>
+    <a href="/admin/articles/new" class="btn btn-success">Novo artigo</a>
+    <table class="table table-striped">
+        <thead>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Slug</th>
+            <th>Categoria</th>
+            <th>Acoes</th>
+        </thead>
+        <tbody>
+            <% articles.forEach( article => { %>
+               <tr>
+                   <td><%= article.ID%></td>
+                   <td><%= article.NAME%></td>
+                   <td><%= article.SLUG%></td>
+                   <td><%= article.CATEGORy.NAME%></td>
+                   <td>
+                        <a href="/admin/articles/edit?articleId=<%= article.ID%>" class="btn btn-warning">
+                            Alterar
+                        </a>
+                       <form action="/admin/articles/delete" method="POST" onsubmit="wannaDelete(event)">
+                            <input type="hidden" name="articleId" value="<%= article.ID%>">
+                            <button class="btn btn-danger">
+                                Apagar
+                            </button>
+                       </form>
+                   </td>
+               </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+<%- include('../../partials/footer.ejs'); %>
+<script>
+    function wannaDelete(event) {
+        let categName = event.target.parentElement.parentElement.childNodes[3].innerText;
+        
+        // Cancelando Submit
+        event.preventDefault();
+
+        // Confirmar Exclusao
+        if(confirm(`Deseja Deletar a categoria "${categName}"?`))
+            event.target.submit();
+    }
+</script>
