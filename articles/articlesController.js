@@ -59,9 +59,11 @@ router.post('/articles/delete', (req, res) => {
 router.get('/articles/edit', (req, res) => {
     articleId = req.query['articleId'];
     Category.findAll().then( (results) => {
-        res.render('./admin/articles/edit', { 
-            articleId: articleId,
-            categResults: results
+        Article.findByPk(articleId).then( articleResult => {
+            res.render('./admin/articles/edit', { 
+                article: articleResult,
+                categResults: results
+        })
          });
     })
     // console.log(req.query['articleId'])
@@ -89,6 +91,8 @@ router.post('/articles/update', (req, res) => {
         }
     ).then( () => {
         res.redirect('/admin/articles');
+    }).catch( err => {
+        res.redirect('./');
     })
 })
 module.exports = router;

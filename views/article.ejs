@@ -3,15 +3,13 @@
 <h1>This Is myBlog</h1>
 <%#- JSON.stringify(articles)%>
 <div class="card">
-<% articles.forEach( article => {%>
     <div class="container card-header">
-        <h2 class="card-title"><%= article.NAME%></h2>
+        <%= article.NAME%>
     </div>
 
-    <div class="container card-body mb-2">
-        <a href="/article?slug=<%= article.SLUG%>" class=" btn btn-success">Ler artigo</a>
+    <div id="article-body" class="container card-body mb-2">
+        <%- article.BODY%>
     </div>
 
-    <% })%>
 </div>
 <%- include('partials/footer.ejs') %>

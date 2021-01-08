@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark bg-warning">
+    <a href="/" class="navbar-brand">
+        MyBlog
+    </a>
+    <% categories.forEach( category => {%>
+        <a href="/category?categName=<%= category.SLUG%>" class="navbar-brand">
+            <%= category.NAME%>
+        </a>
+    <% })%>
+    <a href="/admin/categories" class="navbar-brand">
+        Categories
+    </a>
+    <a href="/admin/articles" class="navbar-brand">
+        Articles
+    </a>
+    <a href="" class="navbar-brand">
+        MyBlog
+    </a>
+
+</nav>
+
