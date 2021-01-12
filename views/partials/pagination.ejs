@@ -1,0 +1,26 @@
+<div class="container">
+    <% if( page && page > 1 ) { %>
+        <span class="">
+            <button class="btn btn-secondary" onclick="window.location = urlPath + '?pageNum=<%= (parseInt(page) - 1) %>'"> 
+                Artigos mais recentes 
+            </button>
+        </span>
+    <% } else {%>
+        <!-- Caso page n exista, n° 1 é atribuído à mesma (pois estamos na página index, sem parâmetro passado via URL) -->
+        <% page = 1%>
+    <% } %>
+    <% if ( next ){%>
+        <span class="">
+            <button class="btn btn-secondary" onclick="window.location = urlPath + '?pageNum=<%= (parseInt(page) + 1) %>'"> 
+                Artigos mais antigos
+            </button>
+        </span>
+    <% }%>
+</div>
+
+<script>
+    let urlPath = window.location.pathname;
+    if(urlPath == '/')
+        urlPath = '/page';
+    console.log(urlPath)
+</script>
