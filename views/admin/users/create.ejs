@@ -1,0 +1,41 @@
+<%- include('../../partials/header.ejs'); %>
+<%- include('../../partials/navbar.ejs');%>
+<div class="container">
+    <h1>Cadastro de Usuarios</h1>
+    <form action="/admin/users/create" method="POST">
+        <div class="form-floating">
+            <!-- Se existir login/emailStatus, é porque a página foi redirecionada atraves de um email/login já existente e foi passado o parametro -->
+        <% if(typeof(loginStatus) == 'undefined') {%>
+
+            <input class="form-control" type="text" name="usrLogin" id="usrLogin">
+            <label for="usrLogin">Login</label>
+
+        <% } else { %>
+            
+            <input class="form-control <%= loginStatus %>" type="text" name="usrLogin" id="usrLogin">
+            <label for="usrLogin">Login inválido!</label>
+
+        <% } %>
+    </div>
+    <div class="form-floating">
+
+        <% if(typeof(emailStatus) == 'undefined') {%>
+
+            <input class="form-control" type="text" name="usrEmail" id="usrEmail">
+            <label for="usrEmail">E-mail</label>
+
+        <% } else { %>
+
+            <input class="form-control <%= emailStatus %>" type="text" name="usrEmail" id="usrEmail">
+            <label for="usrEmail">E-mail inválido!</label>
+
+        <% } %>
+    </div>
+    <div class="form-floating">
+        <input class="form-control" type="password" name="usrPassword" id="usrPassword">
+        <label for="usrPassword">Password</label>
+    </div>
+        <button class="btn btn-success">Cadastrar</button>
+    </form>
+</div>
+<%- include('../../partials/footer.ejs'); %>
