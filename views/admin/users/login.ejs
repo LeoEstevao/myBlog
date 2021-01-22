@@ -1,0 +1,32 @@
+<%- include('../../partials/header.ejs'); %>
+<%- include('../../partials/navbar.ejs');%>
+<div class="container">
+    <h1>Login de Usuário</h1>
+    <form action="/admin/users/login" method="POST">
+        <div class="form-floating">
+            <!-- Se existir login/emailStatus, é porque a página foi redirecionada atraves de um email/login já existente e foi passado o parametro -->
+        <% if(typeof(loginStatus) == 'undefined') {%>
+
+            <input class="form-control" type="text" name="usrLogin" id="usrLogin">
+            <label for="usrLogin">Login ou E-mail</label>
+
+        <% } else { %>
+            
+            <input class="form-control <%= loginStatus %>" type="text" name="usrLogin" id="usrLogin">
+            <label for="usrLogin">Login ou E-mail inválido!</label>
+
+        <% } %>
+    </div>
+    <div class="form-floating">
+        <% if(typeof(passwordStatus) == 'undefined') {%>
+            <input class="form-control" type="password" name="usrPassword" id="usrPassword">
+            <label for="usrPassword">Password</label>
+        <% } else { %>
+            <input class="form-control <%= passwordStatus%>" type="password" name="usrPassword" id="usrPassword">
+            <label for="usrPassword">Password is invalid!</label>
+        <% } %>
+    </div>
+        <button class="btn btn-success">Entrar</button>
+    </form>
+</div>
+<%- include('../../partials/footer.ejs'); %>

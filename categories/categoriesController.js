@@ -3,8 +3,11 @@ const router = express.Router();
 const Category = require('./category.js');
 const slugify = require('slugify');
 
+// middleware
+const adminAuth = require('../middlewares/adminAuth.js');
+
 // LIST CATEGORYS
-router.get('/categories', (req, res) => {
+router.get('/categories', adminAuth, (req, res) => {
     Category.findAll().then( resCategories => {
         res.render('./admin/categories/index.ejs', { categories:resCategories })
     })
@@ -12,12 +15,12 @@ router.get('/categories', (req, res) => {
 })
 
 // CREATE CATEGORY
-router.get('/categories/new', (req, res) => {
+router.get('/categories/new', adminAuth, (req, res) => {
     res.render('./admin/categories/new.ejs');
 
 });
 
-router.post('/categories/save', (req, res) => {
+router.post('/categories/save', adminAuth, (req, res) => {
     let categTitle = req.body.categTitle;
     
     if(categTitle != '') 
@@ -33,7 +36,7 @@ router.post('/categories/save', (req, res) => {
 
 
 // DELETE CATEGORY
-router.post('/categories/delete', (req, res) => {
+router.post('/categories/delete', adminAuth, (req, res) => {
     let categId = req.body.categId;
     if(categId == undefined)
         // return res.send(categId)
@@ -53,7 +56,7 @@ router.post('/categories/delete', (req, res) => {
 
 // EDIT CATEGORY
 
-router.get('/categories/edit', (req, res) => {
+router.get('/categories/edit', adminAuth, (req, res) => {
     let categId = isNaN(req.query['categId']) ? undefined : req.query['categId'];
 
     Category.findByPk(categId).then( result => {
@@ -67,7 +70,7 @@ router.get('/categories/edit', (req, res) => {
     })
 })
 
-router.post('/categories/update', (req, res) => {
+router.post('/categories/update', adminAuth, (req, res) => {
     let categId = req.body.categId;
     let categName = req.body.categName;
     Category.update(
