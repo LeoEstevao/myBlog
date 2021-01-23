@@ -3,7 +3,7 @@
 <h1>This Is myBlog</h1>
 <%#- JSON.stringify(articles)%>
 <div class="card">
-<% articles.forEach( article => {%>
+<% articles.rows.forEach( article => {%>
     <div class="container card-header">
         <h2 class="card-title"><%= article.NAME%></h2>
     </div>
@@ -13,6 +13,6 @@
     </div>
 
     <% })%>
+    <%- include('partials/pagination.ejs')%>
 </div>
-<%- include('partials/pagination.ejs') %>
 <%- include('partials/footer.ejs') %>
