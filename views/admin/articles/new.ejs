@@ -7,7 +7,7 @@
         <h1 class="my-3">Categoria</h1>
         <select name="categId" class="form-control mb-3">
         <% categResults.forEach(categResult => { %>
-                <option class="form-control" value="<%= categResult.ID %>"> <%= categResult.NAME %></option>
+                <option class="form-control" value="<%= categResult.id %>"> <%= categResult.name %></option>
                 <% }); %>
         </select>
         <textarea name="articText" id="tinymceText" class="form-control" rows="30"></textarea>

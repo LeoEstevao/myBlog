@@ -3,8 +3,8 @@
         MyBlog
     </a>
     <% categories.forEach( category => {%>
-        <a href="/category?categName=<%= category.SLUG%>" class="navbar-brand">
-            <%= category.NAME%>
+        <a href="/category?categName=<%= category.slug %>" class="navbar-brand">
+            <%= category.name %>
         </a>
     <% })%>
     <a href="/admin/categories" class="navbar-brand">
@@ -13,8 +13,11 @@
     <a href="/admin/articles" class="navbar-brand">
         Articles
     </a>
-    <a href="" class="navbar-brand">
-        MyBlog
+    <a href="/admin/users/login" class="navbar-brand">
+        login
+    </a>
+    <a href="/admin/users/logout" class="navbar-brand">
+        logout
     </a>
 
 </nav>

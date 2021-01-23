@@ -14,16 +14,17 @@
         <tbody>
             <% articles.forEach( article => { %>
                <tr>
-                   <td><%= article.ID%></td>
-                   <td><%= article.NAME%></td>
-                   <td><%= article.SLUG%></td>
-                   <td><%= article.CATEGORy.NAME%></td>
+                   <td><%= article.id %></td>
+                   <td><%= article.name %></td>
+                   <td><%= article.slug %></td>
+                   <!-- TALVEZ AQUI DÊ PAU (CATEGORy) -->
+                   <td><%= article.category.name %></td>
                    <td>
-                        <a href="/admin/articles/edit?articleId=<%= article.ID%>" class="btn btn-warning">
+                        <a href="/admin/articles/edit?articleId=<%= article.id %>" class="btn btn-warning">
                             Alterar
                         </a>
                        <form action="/admin/articles/delete" method="POST" onsubmit="wannaDelete(event)">
-                            <input type="hidden" name="articleId" value="<%= article.ID%>">
+                            <input type="hidden" name="articleId" value="<%= article.id %>">
                             <button class="btn btn-danger">
                                 Apagar
                             </button>

@@ -3,21 +3,22 @@
 <div class="container">
     <h1 class="my-3">Editar Artigo</h1>
     <form action="/admin/articles/update" method="POST">
-        <input type="hidden" name="articleId" value="<%= article.ID %>">
-        <input class="form-control" type="text" name="articTitle" placeholder="Nome do Artigo" value="<%= article.NAME%>">
+        <input type="hidden" name="articleId" value="<%= article.id %>">
+        <input class="form-control" type="text" name="articTitle" placeholder="Nome do Artigo" value="<%= article.name%>">
         <h1 class="my-3">Categoria</h1>
 
         <select name="categId" class="form-control mb-3">
         <% categResults.forEach(categResult => { %>
             <!-- Deixar selecionado a categoria do artigo -->
-            <% if(categResult.ID === article.CATEGORYID) {%>
-                <option class="form-control" value="<%= categResult.ID %>" SELECTED> <%= categResult.NAME %></option>
+            <!-- PROBLEMA -->
+            <% if(categResult.id === article.categoryId) {%>
+                <option class="form-control" value="<%= categResult.id %>" SELECTED> <%= categResult.name %></option>
             <% }else{ %>
-                <option class="form-control" value="<%= categResult.ID %>"> <%= categResult.NAME %></option>
+                <option class="form-control" value="<%= categResult.id %>"> <%= categResult.name %></option>
             <% } %>
         <% }); %>
         </select>
-        <textarea name="articText" id="tinymceText" class="form-control" rows="30"><%= article.BODY%></textarea>
+        <textarea name="articText" id="tinymceText" class="form-control" rows="30"><%= article.body%></textarea>
         <button class="btn btn-success mt-3" type="submit">Atualizar</button>
     </form>
 </div>

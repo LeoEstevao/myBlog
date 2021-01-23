@@ -10,7 +10,7 @@ const usersController = require('./admin/usersController.js');
 
 const Category = require('./categories/category.js');
 const Article = require('./articles/article.js');
-const User = require('./admin/user.js');
+// const User = require('./admin/user.js');
 // DATABASE
 connection.authenticate()
 // SESSION
@@ -89,7 +89,7 @@ app.get('/category', (req, res) => {
         Category.findAll().then( categResults => {
             res.render('index.ejs', {
                 categories: categResults,
-                articles: categResult.ARTICLEs,
+                articles: categResult.articles,
                 page: false,
                 next: true,
             })
@@ -151,7 +151,8 @@ app.get('/page', (req, res) => {
         })
         // res.json(articResults);
     }).catch(err => {
-
+        if(err)
+            res.redirect('/');
     })
 })
 app.listen(8080);

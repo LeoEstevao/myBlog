@@ -2,27 +2,29 @@ const connection = require('../database/database.js');
 const sequelize = require('sequelize');
 
 const Users = connection.define('users', {
-    ID: {
+    id: {
         type: sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    LOGIN: {
+    login: {
         type: sequelize.STRING,
         allowNull: false,
         unique: true
     },
-    EMAIL: {
+    email: {
         type: sequelize.STRING,
         allowNull: false,
         unique: true
     },
-    PASSWORD: {
+    password: {
         type: sequelize.STRING,
         allowNull: false
     }
 });
 
-Users.sync({force: false});
+Users.sync(
+    // {force: true}
+);
 
 module.exports = Users;

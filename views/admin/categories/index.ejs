@@ -13,18 +13,18 @@
         <tbody>
             <% categories.forEach(categorie => { %>
                 <tr>
-                    <th><%= categorie.ID%></th>
-                    <th><%= categorie.NAME%></th>
-                    <th><%= categorie.SLUG%></th>
+                    <th><%= categorie.id %></th>
+                    <th><%= categorie.name %></th>
+                    <th><%= categorie.slug %></th>
                     <th>
-                        <a class="btn btn-warning" href="/admin/categories/edit?categId=<%= categorie.ID%>">
+                        <a class="btn btn-warning" href="/admin/categories/edit?categId=<%= categorie.id %>">
                             <!-- <button class="btn btn-warning"> -->
                                 Editar
                             <!-- </button> -->
                         </a>
                         
                         <form action="/admin/categories/delete" method="POST" onsubmit="wannaDelete(event)">
-                            <input type="hidden" name="categId" value="<%= categorie.ID%>">
+                            <input type="hidden" name="categId" value="<%= categorie.id %>">
                             <button class="btn btn-danger" >
                                 Apagar
                             </button>

@@ -34,10 +34,11 @@ router.post('/articles/save', adminAuth, (req, res) => {
     let categId = req.body.categId;
 
     Article.create({
-        NAME: articTitle,
-        SLUG: slugify(articTitle),
-        BODY: articText,
-        CATEGORYID: categId
+        name: articTitle,
+        slug: slugify(articTitle),
+        body: articText,
+        // PROBLEMA
+        categoryId: categId
     }).then( () => {
         res.redirect('/admin/articles');
     })
@@ -53,7 +54,7 @@ router.post('/articles/delete', adminAuth, (req, res) => {
 
     Article.destroy({
         where: {
-            ID: articleId
+            id: articleId
         }
     }).then( () => {
         res.redirect('/admin/articles');
@@ -83,20 +84,22 @@ router.post('/articles/update', adminAuth, (req, res) => {
 
     Article.update(
         {
-            NAME: articTitle,
-            SLUG: slugify(articTitle),
-            BODY: articText,
-            CATEGORYID: categId
+            name: articTitle,
+            slug: slugify(articTitle),
+            body: articText,
+            // PROBLEMA
+            categoryId: categId
         },
         {
             where:{
-                ID: articleId
+                id: articleId
             }
         }
     ).then( () => {
         res.redirect('/admin/articles');
     }).catch( err => {
-        res.redirect('./');
+        if(err)
+            res.redirect('./');
     })
 })
 module.exports = router;

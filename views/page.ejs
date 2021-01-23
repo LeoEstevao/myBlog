@@ -5,11 +5,11 @@
 <div class="card">
 <% articles.rows.forEach( article => {%>
     <div class="container card-header">
-        <h2 class="card-title"><%= article.NAME%></h2>
+        <h2 class="card-title"><%= article.name %></h2>
     </div>
 
     <div class="container card-body mb-2">
-        <a href="/article?slug=<%= article.SLUG%>" class=" btn btn-success">Ler artigo</a>
+        <a href="/article?slug=<%= article.slug %>" class=" btn btn-success">Ler artigo</a>
     </div>
 
     <% })%>

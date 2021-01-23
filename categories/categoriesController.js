@@ -25,8 +25,8 @@ router.post('/categories/save', adminAuth, (req, res) => {
     
     if(categTitle != '') 
     Category.create({
-        NAME: categTitle,
-        SLUG: slugify(categTitle)
+        name: categTitle,
+        slug: slugify(categTitle)
     }).then( () => {
         res.redirect('./');
     })
@@ -46,7 +46,7 @@ router.post('/categories/delete', adminAuth, (req, res) => {
 
     Category.destroy({
         where: {
-            ID: categId
+            id: categId
         }
     }).then( () => {
         res.redirect('.');
@@ -75,12 +75,12 @@ router.post('/categories/update', adminAuth, (req, res) => {
     let categName = req.body.categName;
     Category.update(
         {// Updated field
-            NAME: categName,
-            SLUG: slugify(categName)
+            name: categName,
+            slug: slugify(categName)
         },
         {
             where:
-            {ID: categId}
+            {id: categId}
         }).then(() =>{
             res.redirect('./')
         })

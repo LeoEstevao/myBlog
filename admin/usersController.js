@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const { Op } = require('sequelize');
 
 // middleware
-const adminAuth = require('../middlewares/adminAuth.js');
+// const adminAuth = require('../middlewares/adminAuth.js');
 
 router.get('/users', (req, res) => {
     User.findAll().then( resUsers => {
@@ -43,9 +43,9 @@ router.post('/users/create', (req, res) => {
                     let salt = bcrypt.genSaltSync(10);
                     let hash = bcrypt.hashSync(usrPassword, salt);
                     User.create({
-                        LOGIN: usrLogin,
-                        EMAIL: usrEmail,
-                        PASSWORD: hash
+                        login: usrLogin,
+                        email: usrEmail,
+                        password: hash
                     }).then(
                         res.redirect('/admin/users')
                         // res.json(req.body)
@@ -85,8 +85,8 @@ router.post('/users/login', (req, res) => {
     User.findOne({
         where: {
             [Op.or]: [
-                {EMAIL: usrLogin},
-                {LOGIN: usrLogin}
+                {email: usrLogin},
+                {login: usrLogin}
             ]
         }
     }).then( usrResult => {
@@ -97,13 +97,13 @@ router.post('/users/login', (req, res) => {
             })
         
             // Transforma a senha passada em uma hash, e compara com a hash salva no bd(retorna boolean)
-            let usrValidated = bcrypt.compareSync(usrPassword, usrResult.PASSWORD);
+            let usrValidated = bcrypt.compareSync(usrPassword, usrResult.password);
 
             if(usrValidated){
                 req.session.user = {
-                    id: usrResult.ID,
-                    login: usrResult.LOGIN,
-                    email: usrResult.EMAIL,
+                    id: usrResult.id,
+                    login: usrResult.login,
+                    email: usrResult.email,
                 }
                 // res.redirect('/');
                 res.send(req.session.user);
@@ -115,7 +115,8 @@ router.post('/users/login', (req, res) => {
             passwordStatus: 'is-invalid'
         })
     }).catch( err => {
-        res.redirect('/');
+        if(err)
+            res.redirect('/');
     })
     
 })
