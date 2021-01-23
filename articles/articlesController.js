@@ -5,7 +5,11 @@ const Category = require('../categories/category.js');
 const Article = require('./article.js');
 const slugify = require('slugify');
 
-router.get('/articles/', (req, res) => {
+// Funcao middleware
+const adminAuth = require('../middlewares/adminAuth.js');
+
+
+router.get('/articles/', adminAuth, (req, res) => {
     // res.send('Artigo')
     Article.findAll({
         // Dar joins: passar um array com as tabelas que queremos receber na consulta
@@ -18,13 +22,13 @@ router.get('/articles/', (req, res) => {
 
 // router.get('/article/')
 
-router.get('/articles/new', (req, res) => {
+router.get('/articles/new', adminAuth, (req, res) => {
     Category.findAll().then( result => {
         res.render('./admin/articles/new.ejs', { categResults: result })
     })
 });
 
-router.post('/articles/save', (req, res) => {
+router.post('/articles/save', adminAuth, (req, res) => {
     let articTitle = req.body.articTitle;
     let articText = req.body.articText;
     let categId = req.body.categId;
@@ -39,7 +43,7 @@ router.post('/articles/save', (req, res) => {
     })
 })
 
-router.post('/articles/delete', (req, res) => {
+router.post('/articles/delete', adminAuth, (req, res) => {
     articleId = req.body.articleId;
     if(articleId == undefined)
         // return res.send(categId)
@@ -56,7 +60,7 @@ router.post('/articles/delete', (req, res) => {
     })
 })
 
-router.get('/articles/edit', (req, res) => {
+router.get('/articles/edit', adminAuth, (req, res) => {
     articleId = req.query['articleId'];
     Category.findAll().then( (results) => {
         Article.findByPk(articleId).then( articleResult => {
@@ -71,7 +75,7 @@ router.get('/articles/edit', (req, res) => {
 
 })
 
-router.post('/articles/update', (req, res) => {
+router.post('/articles/update', adminAuth, (req, res) => {
     articleId = req.body.articleId;
     articText = req.body.articText;
     articTitle = req.body.articTitle;

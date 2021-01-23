@@ -3,14 +3,25 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database.js');
+const session = require('express-session');
 const articlesController = require('./articles/articlesController.js');
 const categoriesController = require('./categories/categoriesController.js');
+const usersController = require('./admin/usersController.js');
 
 const Category = require('./categories/category.js');
 const Article = require('./articles/article.js');
+const User = require('./admin/user.js');
 // DATABASE
 connection.authenticate()
-
+// SESSION
+// PS: Por padrao, o express salva as sessions na "memória RAM" do servidor, o que pode acarretar ao gargalo da memória em grandes projetos. 
+    // Para resolver isso, há um banco de dados chamado "Redis", que foi feito especialmente para armazenar sessions
+app.use(session({
+    secret: 'myRandomWord',
+    cookie: {
+        maxAge: 3000000
+    }
+}));
 // STATIC
 app.use(express.static('public'))
 // EJS
@@ -19,8 +30,10 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+
 app.use('/admin', articlesController);
 app.use('/admin', categoriesController);
+app.use('/admin', usersController);
 
 app.get('/', (req, res) => {
     // TODO: LIMITAR?
@@ -81,6 +94,6 @@ app.get('/category', (req, res) => {
     }).catch( err => {
         res.redirect('/');
     })
-})
+});
 
 app.listen(8080);
