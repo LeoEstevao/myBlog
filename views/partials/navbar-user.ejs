@@ -1,24 +1,47 @@
-<nav class="navbar navbar-dark bg-warning">
-    <a href="/" class="navbar-brand">
-        MyBlog
-    </a>
-    <% categories.forEach( category => {%>
-        <a href="/category?categName=<%= category.slug %>" class="navbar-brand">
-            <%= category.name %>
-        </a>
-    <% })%>
-    <a href="/admin/categories" class="navbar-brand">
-        Categories
-    </a>
-    <a href="/admin/articles" class="navbar-brand">
-        Articles
-    </a>
-    <a href="/admin/users/login" class="navbar-brand">
-        login
-    </a>
-    <a href="/admin/users/logout" class="navbar-brand">
-        logout
-    </a>
+<nav class="navbar navbar-expand navbar-dark bg-warning">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <a href="/" class="navbar-brand">
+                MyBlog
+            </a>
+            <li class="nav-item dropdown">
+                <a href="#" id="navbarDropdownCategories" class="nav-link dropdown-toggle"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorias
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
+                    <% categories.forEach( category => {%>
+                        <li><a href="/category?categName=<%= category.slug %>" class="dropdown-item">
+                            <%= category.name %>
+                        </a></li>
+                    <% })%>
+                
+                    
+                </ul>
+            </li>
+            <!-- <li class="nav-item"><a href="" class="nav-link">
+                Outro
+            </a></li> -->
+        </ul>
 
+        <ul class="navbar-nav ml-auto">
+            
+            <form class="d-flex me-5">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar Artigo" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            </form>            
+            <li class="nav-item">
+                <a href="/admin/users/login" class="nav-link">
+                    login
+                </a>
+            </li>
+            <div class="navbar-nav">
+                    <a href="/admin/users/logout" class="nav-link">
+                        logout
+                    </a>
+            </div>
+
+        </ul>
+    </div>
 </nav>
 

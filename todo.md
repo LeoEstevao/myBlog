@@ -10,7 +10,7 @@
 
 ## Limit/Pagination Categories and Articles 
 >Pagination Articles/Categories views (admin)[-]
->Pagination Articles filtered by Categories (users)[-]
+>Pagination Index, Articles filtered by Categories (users)[-]
 
 ## Fix navbar OR CREATE A SIDEBAR FOR USERS NAVIGATION, AND NAVBAR MOSTLY FOR ADMIN NAVIGATION?
 >Change Links Redirections (login/logout, others).[-]
@@ -21,19 +21,18 @@
 ## DATABASE Fixes
 >Change the plural to singular on BD, because sequelize automatically messed up everything[x]
     https://stackoverflow.com/questions/49459596/how-do-plurals-work-in-sequelize/49459597
-
 >Create nulls fields on Database [x]
 >Validate inputs on with javascript (all need to have value, or create default value on DB).[-]
 >Limit chars fields (Like Categories, login, email IN JAVASCRIPT!!!)[-]
 >Check if an e-mail is valid?[-]
 
 ## PATTERNS
->Padronizar referencias do controler e dos ejs dos articles (alguns estao como articId, outros articleId)[-]
->Criar ou remover todos os catch(err) -> Redirect('/')[-]
+>Make a pattern of references of controles and of ejs files (likes, articId x articleId)[-]
+>Create or remove all catch(err) -> Redirect('/')[-]
 
 ## CSS/LAYOUT FIXES
->Atualizar layout das listas do admin (na parte dos botoes alterar/deletar)[-]
-
+>Update layout of articles/categories lists (like the cells with delete/update)[-]
+>Update background-color of dropdown menu[-]
 
 # MIDDLEWARES
 >Check why the fuckk the middleware in routes users/create don't work[-]
@@ -41,6 +40,7 @@
 https://www.google.com/search?q=Error+%5BERR_HTTP_HEADERS_SENT%5D%3A+Cannot+set+headers+after+they+are+sent+to+the+client&oq=Error+%5BERR_HTTP_HEADERS_SENT%5D%3A+Cannot+set+headers+after+they+are+sent+to+the+client&aqs=chrome..69i57.387j0j7&sourceid=chrome&ie=UTF-8
 
 ## IMPROVEMENT
+>Make search work
 >Make a logic, to when you be redirect to login page, instead, you just render the login page, and after that you will be redirected to the page you wanted to access before[-]
 
 ## QUICK FIX
