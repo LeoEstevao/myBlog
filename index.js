@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database.js');
+const { Op } = require('sequelize');
 const session = require('express-session');
 const articlesController = require('./articles/articlesController.js');
 const categoriesController = require('./categories/categoriesController.js');
@@ -47,6 +48,7 @@ app.get('/', (req, res) => {
                 categories: categResults,
                 page: false,
                 next: true,
+                authStatus: req.session.user
             });
         })
     })
@@ -66,7 +68,11 @@ app.get('/article', (req, res) => {
         if(articResult == undefined)
             return res.redirect('/');
         Category.findAll().then( categResults => {
-            res.render('./article.ejs', {article: articResult, categories: categResults});
+            res.render('./article.ejs', {
+                article: articResult, 
+                categories: categResults,
+                authStatus: req.session.user
+            });
 
         })
     }).catch( err =>
@@ -92,6 +98,7 @@ app.get('/category', (req, res) => {
                 articles: categResult.articles,
                 page: false,
                 next: true,
+                authStatus: req.session.user
             })
             // res.send(categResults)
         })
@@ -146,13 +153,40 @@ app.get('/page', (req, res) => {
                 articles: articResults,
                 categories: categResults,
                 next: next,
-                page: page
+                page: page,
+                authStatus: req.session.user
             })
         })
         // res.json(articResults);
     }).catch(err => {
         if(err)
             res.redirect('/');
+    })
+})
+
+app.get('/search', (req, res) => {
+    // res.send(req.query);
+    let articSearch = req.query.articSearch
+    Article.findAll( {
+        where: {
+            name: {
+                [Op.like]: `%${articSearch}%`
+                // [Op.like]: `%artigo%`
+            }
+        }
+    }).then( articResults => {
+        // res.json(articResults);
+        Category.findAll().then( categResults => {
+            // res.json(categResults);
+            res.render('./index.ejs', {
+                articles: articResults,
+                categories: categResults,
+                page: 1,
+                next: true,
+                authStatus: req.session.user
+            })
+        })
+        
     })
 })
 app.listen(8080);

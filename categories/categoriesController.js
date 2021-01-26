@@ -9,14 +9,19 @@ const adminAuth = require('../middlewares/adminAuth.js');
 // LIST CATEGORYS
 router.get('/categories', adminAuth, (req, res) => {
     Category.findAll().then( resCategories => {
-        res.render('./admin/categories/index.ejs', { categories:resCategories })
+        res.render('./admin/categories/index.ejs', { 
+            categories:resCategories,
+            authStatus: req.session.user
+        })
     })
 
 })
 
 // CREATE CATEGORY
 router.get('/categories/new', adminAuth, (req, res) => {
-    res.render('./admin/categories/new.ejs');
+    res.render('./admin/categories/new.ejs', {
+        authStatus: req.session.user
+    });
 
 });
 
@@ -31,7 +36,9 @@ router.post('/categories/save', adminAuth, (req, res) => {
         res.redirect('./');
     })
     else
-    res.render('./admin/categories/new.ejs');
+    res.render('./admin/categories/new.ejs', {
+        authStatus: req.session.user
+    });
 })
 
 
@@ -63,7 +70,8 @@ router.get('/categories/edit', adminAuth, (req, res) => {
         if(categId == undefined)
             res.redirect('/categories');
         res.render('./admin/categories/edit.ejs', {
-            result
+            result,
+            authStatus: req.session.user
         })
     }).catch(err => {
         res.redirect('./');

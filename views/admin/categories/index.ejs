@@ -44,7 +44,8 @@
         event.preventDefault();
 
         // Confirmar Exclusao
-        if(confirm(`Deseja Deletar a categoria "${categName}"?`))
+        if(confirm(`Deseja Deletar a categoria "${categName}"? 
+TODOS artigos desta categoria também serão apagados!`))
             event.target.submit();
     }
 </script>

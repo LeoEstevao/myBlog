@@ -3,11 +3,11 @@
 <div class="container">
     <h1 class="my-3">Editar Artigo</h1>
     <form action="/admin/articles/update" method="POST">
-        <input type="hidden" name="articleId" value="<%= article.id %>">
+        <input type="hidden" name="articId" value="<%= article.id %>">
         <input class="form-control" type="text" name="articTitle" placeholder="Nome do Artigo" value="<%= article.name%>">
         <h1 class="my-3">Categoria</h1>
 
-        <select name="categId" class="form-control mb-3">
+        <select name="categId" class="form-control mb-3" >
         <% categResults.forEach(categResult => { %>
             <!-- Deixar selecionado a categoria do artigo -->
             <!-- PROBLEMA -->

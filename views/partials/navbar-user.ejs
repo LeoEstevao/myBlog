@@ -26,20 +26,27 @@
 
         <ul class="navbar-nav ml-auto">
             
-            <form class="d-flex me-5">
-                <input class="form-control me-2" type="search" placeholder="Pesquisar Artigo" aria-label="Search">
+            <form class="d-flex me-5" action="/search" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar Artigo" 
+                name="articSearch" aria-label="Search">
                 <button class="btn btn-outline-light" type="submit">Buscar</button>
             </form>            
-            <li class="nav-item">
-                <a href="/admin/users/login" class="nav-link">
-                    login
-                </a>
-            </li>
-            <div class="navbar-nav">
-                    <a href="/admin/users/logout" class="nav-link">
-                        logout
+            <% if(typeof(authStatus) == 'undefined') {%>
+                <li class="nav-item">
+                    <a href="/admin/users/login" class="nav-link">
+                        login<%#= %>
                     </a>
-            </div>
+                </li>
+            <%} else {%>
+                <div class="navbar-nav">
+                    <!-- <div class="navbar-brand"> -->
+                        <a href="/admin/users/logout" class="nav-link">
+                        <!-- <a href="/admin/users/logout" class="navbar-brand"> -->
+                            logout
+                        </a>
+                    <!-- </div> -->
+                </div>
+            <% } %>
 
         </ul>
     </div>

@@ -20,11 +20,11 @@
                    <!-- TALVEZ AQUI DÊ PAU (CATEGORy) -->
                    <td><%= article.category.name %></td>
                    <td>
-                        <a href="/admin/articles/edit?articleId=<%= article.id %>" class="btn btn-warning">
+                        <a href="/admin/articles/edit?articId=<%= article.id %>" class="btn btn-warning">
                             Alterar
                         </a>
                        <form action="/admin/articles/delete" method="POST" onsubmit="wannaDelete(event)">
-                            <input type="hidden" name="articleId" value="<%= article.id %>">
+                            <input type="hidden" name="articId" value="<%= article.id %>">
                             <button class="btn btn-danger">
                                 Apagar
                             </button>

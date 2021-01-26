@@ -25,6 +25,8 @@
                 </ul>
 
             </li>
+            
+
             <li class="nav-item dropdown">
                 <!-- <a href="/admin/articles" class="nav-link"> -->
                 <a href="#" id="navbarDropdownArticles" class="nav-link dropdown-toggle"
@@ -40,22 +42,42 @@
                     </a></li>
                 </ul>
             </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a href="/admin/users/login" class="nav-link">
-                    login
+
+            <li class="nav-item dropdown">
+                <a href="#" id="navbarDropdownUsers" class="nav-link dropdown-toggle"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Usuários
                 </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsers">
+                    <li><a href="/admin/users" class="dropdown-item">
+                        Lista
+                    </a></li>
+                    <li><a href="/admin/users/new" class="dropdown-item">
+                        Novo
+                    </a></li>
+                </ul>
             </li>
 
-            <div class="navbar-nav">
-                <!-- <div class="navbar-brand"> -->
-                    <a href="/admin/users/logout" class="nav-link">
-                    <!-- <a href="/admin/users/logout" class="navbar-brand"> -->
-                        logout
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <%# if(typeof(passwordStatus) == 'undefined') {%>
+            <% if(typeof(authStatus) == 'undefined') {%>
+                <li class="nav-item">
+                    <a href="/admin/users/login" class="nav-link">
+                        login<%#= %>
                     </a>
-                <!-- </div> -->
-            </div>
+                </li>
+            <%} else {%>
+                <div class="navbar-nav">
+                    <!-- <div class="navbar-brand"> -->
+                        <a href="/admin/users/logout" class="nav-link">
+                        <!-- <a href="/admin/users/logout" class="navbar-brand"> -->
+                            logout
+                        </a>
+                    <!-- </div> -->
+                </div>
+            <% } %>
+
 
         </ul>
     

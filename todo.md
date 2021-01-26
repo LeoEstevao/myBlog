@@ -13,9 +13,9 @@
 >Pagination Index, Articles filtered by Categories (users)[-]
 
 ## Fix navbar OR CREATE A SIDEBAR FOR USERS NAVIGATION, AND NAVBAR MOSTLY FOR ADMIN NAVIGATION?
->Change Links Redirections (login/logout, others).[-]
->Create two navbar, for users and admin[-]
->Fix navbars refs. There are two navbars, for users and for admin, and they are differents and don't reference each other? (PUT A LOGIN/LOGOUT LINK ON USERS NAVBAR?)[-]
+>Change Links Redirections (login/logout, others).[x]
+>Create two navbar, for users and admin[x]
+>Fix navbars refs. There are two navbars, for users and for admin, and they are differents and don't reference each other? (PUT A LOGIN/LOGOUT LINK ON USERS NAVBAR?)[x]
 >Fix users navbar for limits of categories (and characters?)[-]
 
 ## DATABASE Fixes
@@ -27,7 +27,7 @@
 >Check if an e-mail is valid?[-]
 
 ## PATTERNS
->Make a pattern of references of controles and of ejs files (likes, articId x articleId)[-]
+>Make a pattern of references of controles and of ejs files (likes, articId x articleId)[x]
 >Create or remove all catch(err) -> Redirect('/')[-]
 
 ## CSS/LAYOUT FIXES
@@ -40,10 +40,11 @@
 https://www.google.com/search?q=Error+%5BERR_HTTP_HEADERS_SENT%5D%3A+Cannot+set+headers+after+they+are+sent+to+the+client&oq=Error+%5BERR_HTTP_HEADERS_SENT%5D%3A+Cannot+set+headers+after+they+are+sent+to+the+client&aqs=chrome..69i57.387j0j7&sourceid=chrome&ie=UTF-8
 
 ## IMPROVEMENT
->Make search work
->Make a logic, to when you be redirect to login page, instead, you just render the login page, and after that you will be redirected to the page you wanted to access before[-]
+>Make search work[x]
+>Make only appear Login OR logout (search all renders, and pass authStatus: req.session.user OR TRY MAKE AN IF(session){autStatus: true}) -> and apply in both navbars[x]
+>Create a link on User-Navbar, for admin contents
 
 ## QUICK FIX
->Remove debug (json view) from Edit Categorie
->Remove Button 'Artigos mais antigos' from Articles by Categories (even if there is 0 results, it appears)
->Put an default value on select category (when creating a new article)
+>Remove debug (json view) from Edit Categorie[x]
+>Remove Button 'Artigos mais antigos' from Articles by Categories (even if there is 0 results, it appears)[-]
+>Put an default value on select category (when creating a new article)[x]

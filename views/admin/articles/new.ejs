@@ -6,6 +6,7 @@
         <input class="form-control" type="text" name="articTitle" placeholder="Nome do Artigo">
         <h1 class="my-3">Categoria</h1>
         <select name="categId" class="form-control mb-3">
+            <!-- <option value="" disabled hidden selected>Selecione uma Categoria</option>  -->
         <% categResults.forEach(categResult => { %>
                 <option class="form-control" value="<%= categResult.id %>"> <%= categResult.name %></option>
                 <% }); %>

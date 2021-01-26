@@ -10,18 +10,21 @@ const { Op } = require('sequelize');
 router.get('/users', (req, res) => {
     User.findAll().then( resUsers => {
         res.render('./admin/users/index.ejs', {
-            users: resUsers
+            users: resUsers,
+            authStatus: req.session.user
         })
     }).catch( err => {
         res.redirect('/');
     })
 });
 
-router.get('/users/create', (req, res) => {
-    res.render('./admin/users/create.ejs');
+router.get('/users/new', (req, res) => {
+    res.render('./admin/users/new.ejs', {
+        authStatus: req.session.user
+    });
 })
 
-router.post('/users/create', (req, res) => {
+router.post('/users/new', (req, res) => {
     
     let usrLogin = req.body.usrLogin;
     let usrEmail = req.body.usrEmail;
@@ -52,13 +55,15 @@ router.post('/users/create', (req, res) => {
                     );
                 }
                 else
-                    res.render('./admin/users/create.ejs', {
-                        emailStatus: 'is-invalid'
+                    res.render('./admin/users/new.ejs', {
+                        emailStatus: 'is-invalid',
+                        authStatus: req.session.user
                     })
             })
             else
-                res.render('./admin/users/create.ejs', {
-                    loginStatus: 'is-invalid'
+                res.render('./admin/users/new.ejs', {
+                    loginStatus: 'is-invalid',
+                    authStatus: req.session.user
                 })
     })
 
@@ -66,15 +71,18 @@ router.post('/users/create', (req, res) => {
     
 })
 router.get('/users/login', (req, res) => {
-    res.render('./admin/users/login.ejs');
+    res.render('./admin/users/login.ejs', {
+        authStatus: req.session.user
+    });
 })
 
 
 
 router.get('/users/logout', (req, res) => {
         req.session.user = undefined;
+        res.redirect('/');
         // CHANGE IT
-        res.send('Voce FOI DESLOGADO');
+        // res.send('Voce FOI DESLOGADO');
 })
 
 
@@ -93,7 +101,8 @@ router.post('/users/login', (req, res) => {
         if(usrResult == undefined)
             // res.send('Erro ao encontrar usuario');
             res.render('./admin/users/login.ejs', {
-                loginStatus: 'is-invalid'
+                loginStatus: 'is-invalid',
+                authStatus: req.session.user
             })
         
             // Transforma a senha passada em uma hash, e compara com a hash salva no bd(retorna boolean)
@@ -105,14 +114,16 @@ router.post('/users/login', (req, res) => {
                     login: usrResult.login,
                     email: usrResult.email,
                 }
-                // res.redirect('/');
-                res.send(req.session.user);
+                res.redirect('/admin/articles/new');
+                
+                // res.send(req.session.user);
             }
         
         // res.json(usrResult);
         res.render('./admin/users/login.ejs', {
             loginStatus: 'is-invalid',
-            passwordStatus: 'is-invalid'
+            passwordStatus: 'is-invalid',
+            authStatus: req.session.user
         })
     }).catch( err => {
         if(err)

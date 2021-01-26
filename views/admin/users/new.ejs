@@ -2,7 +2,7 @@
 <%- include('../../partials/navbar.ejs');%>
 <div class="container">
     <h1>Cadastro de Usuarios</h1>
-    <form action="/admin/users/create" method="POST">
+    <form action="/admin/users/new" method="POST">
         <div class="form-floating">
             <!-- Se existir login/emailStatus, é porque a página foi redirecionada atraves de um email/login já existente e foi passado o parametro -->
         <% if(typeof(loginStatus) == 'undefined') {%>

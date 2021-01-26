@@ -16,7 +16,10 @@ router.get('/articles/', adminAuth, (req, res) => {
         // include: [{model: modalImportado}]
         include: [ {model: Category} ]
     }).then( results => {
-        res.render('./admin/articles/index.ejs', { articles: results })
+        res.render('./admin/articles/index.ejs', { 
+            articles: results,
+            authStatus: req.session.user
+        })
     })
 });
 
@@ -24,7 +27,10 @@ router.get('/articles/', adminAuth, (req, res) => {
 
 router.get('/articles/new', adminAuth, (req, res) => {
     Category.findAll().then( result => {
-        res.render('./admin/articles/new.ejs', { categResults: result })
+        res.render('./admin/articles/new.ejs', { 
+            categResults: result,
+            authStatus: req.session.user 
+        })
     })
 });
 
@@ -45,16 +51,16 @@ router.post('/articles/save', adminAuth, (req, res) => {
 })
 
 router.post('/articles/delete', adminAuth, (req, res) => {
-    articleId = req.body.articleId;
-    if(articleId == undefined)
+    articId = req.body.articId;
+    if(articId == undefined)
         // return res.send(categId)
         return res.send('Erro ao excluir categoria, id inválido!');
-    if(isNaN(articleId))
+    if(isNaN(articId))
         return res.send('Erro ao excluir categoria, id passado nao é um número!');
 
     Article.destroy({
         where: {
-            id: articleId
+            id: articId
         }
     }).then( () => {
         res.redirect('/admin/articles');
@@ -62,22 +68,23 @@ router.post('/articles/delete', adminAuth, (req, res) => {
 })
 
 router.get('/articles/edit', adminAuth, (req, res) => {
-    articleId = req.query['articleId'];
+    articId = req.query['articId'];
     Category.findAll().then( (results) => {
-        Article.findByPk(articleId).then( articleResult => {
+        Article.findByPk(articId).then( articleResult => {
             res.render('./admin/articles/edit', { 
                 article: articleResult,
-                categResults: results
+                categResults: results,
+                authStatus: req.session.user
         })
          });
     })
-    // console.log(req.query['articleId'])
-    // res.send(req.query['articleId']);
+    // console.log(req.query['articId'])
+    // res.send(req.query['articId']);
 
 })
 
 router.post('/articles/update', adminAuth, (req, res) => {
-    articleId = req.body.articleId;
+    articId = req.body.articId;
     articText = req.body.articText;
     articTitle = req.body.articTitle;
     categId = req.body.categId;
@@ -92,7 +99,7 @@ router.post('/articles/update', adminAuth, (req, res) => {
         },
         {
             where:{
-                id: articleId
+                id: articId
             }
         }
     ).then( () => {
