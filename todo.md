@@ -42,7 +42,7 @@ https://www.google.com/search?q=Error+%5BERR_HTTP_HEADERS_SENT%5D%3A+Cannot+set+
 ## IMPROVEMENT
 >Make search work[x]
 >Make only appear Login OR logout (search all renders, and pass authStatus: req.session.user OR TRY MAKE AN IF(session){autStatus: true}) -> and apply in both navbars[x]
->Create a link on User-Navbar, for admin contents
+>Create a link on User-Navbar, for admin contents[-]
 
 ## QUICK FIX
 >Remove debug (json view) from Edit Categorie[x]
